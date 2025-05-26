@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Biométrico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper" style="background: var(--cadastro-gradient);">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                    </svg>
+                </div>
+                <h1>Cadastro Biométrico</h1>
+                <p class="subtitle">Registre sua identidade facial</p>
+            </div>
+
+            <form method="POST" enctype="multipart/form-data" action="{{ url_for('cadastro') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <label for="nome" class="fancy-label">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" class="fancy-input" required placeholder="Digite seu nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="foto" class="fancy-label">Imagem Facial</label>
+                    <div class="camera-preview">
+                        <div class="camera-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 9a3.75 3.75 0 100 7.5A3.75 3.75 0 0012 9z"/>
+                                <path fill-rule="evenodd" d="M9.344 3.071a49.52 49.52 0 015.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 01-3 3h-15a3 3 0 01-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 001.11-.71l.822-1.315a2.942 2.942 0 012.332-1.39zM6.75 12.75a5.25 5.25 0 1110.5 0 5.25 5.25 0 01-10.5 0zm12-1.5a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <p>Foto frontal com boa iluminação</p>
+                    </div>
+                    <div class="upload-instructions">
+                        <div class="instruction-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span>Rosto deve ocupar pelo menos 50% da imagem</span>
+                        </div>
+                    </div>
+                    <input type="file" id="foto" name="foto" accept="image/*" class="inputfile" required>
+                    <label for="foto" class="file-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                            <path d="M10 0l-5.2 4.9h3.2v3h4v-3h3.2l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.2-.1-.2-.1h-3.5l3.4-2.6h-2l-3.2 2.1c-.4.3-.7.6-1 1l.2 1.1 2.2 7.1h10.2l2.2-7.1.2-1.1c-.3-.4-.6-.8-1-1zm-1 6l-2.2-6.8h-10.4l-2.2 6.8h14.8z"/>
+                        </svg>
+                        <span>Selecione uma foto</span>
+                    </label>
+                </div>
+                <button type="submit" class="fancy-btn">Cadastrar Digital Facial</button>
+            </form>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="message-container">
+                        {% for category, message in messages %}
+                            <p class="{{ category }}">{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

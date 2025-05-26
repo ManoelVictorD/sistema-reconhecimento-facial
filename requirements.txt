@@ -1,0 +1,7 @@
+echo flask > requirements.txt
+echo flask-wtf >> requirements.txt
+echo face_recognition >> requirements.txt
+echo numpy >> requirements.txt
+echo pillow >> requirements.txt
+echo pyjwt >> requirements.txt
+echo python-decouple >> requirements.txt

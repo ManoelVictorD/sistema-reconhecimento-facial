@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="form-wrapper" style="background: var(--log-gradient);">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+            </div>
+            <h1>Registros de Acesso</h1>
+            <p class="subtitle">Página {{ pagina }} de {{ total_paginas }}</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data/Hora</th>
+                        <th>Usuário</th>
+                        <th>Operação</th>
+                        <th>Status</th>
+                        <th>Detalhes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ log[1] }}</td>
+                        <td>{{ log[3] or 'Sistema' }}</td>
+                        <td>{{ log[4] }}</td>
+                        <td>
+                            <span class="status-badge {{ log[5] | lower | replace('SUCESSO', 'success') | replace('FALHA', 'error') | replace('AVISO', 'warning') }}">
+                                {{ log[5] }}
+                            </span>
+                        </td>
+                        <td>{{ log[6] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            {% if pagina > 1 %}
+                <a href="{{ url_for('visualizar_logs', pagina=pagina-1) }}" class="fancy-btn">Anterior</a>
+            {% endif %}
+            
+            <span class="page-info">Página {{ pagina }} de {{ total_paginas }}</span>
+            
+            {% if pagina < total_paginas %}
+                <a href="{{ url_for('visualizar_logs', pagina=pagina+1) }}" class="fancy-btn">Próxima</a>
+            {% endif %}
+        </div>
+
+        <a href="{{ url_for('listar_usuarios') }}" class="fancy-btn">
+            Voltar ao Painel
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+venv/
+instance/
+fotos/
+banco_de_dados.db
+.env
+__pycache__/
+*.pyc
