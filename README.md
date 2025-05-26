@@ -1,26 +1,22 @@
-# Reconhecimento Facial para Controle de Acesso
+# Facial Authentication System
 
-## Descrição
-Este projeto é um sistema de autenticação facial desenvolvido em Python com Flask, usando a biblioteca `face_recognition` para reconhecimento facial e SQLite como banco de dados. Ele permite:
-- Cadastro de usuários com nome e foto facial.
-- Autenticação via reconhecimento facial.
-- Gerenciamento de usuários e logs por um painel administrativo.
+## 🚀 Como Executar
+```bash
+# 1. Clone o repositório
+git clone https://github.com/seu-user/facial-auth.git
+cd facial-auth
 
-O sistema foi projetado com boas práticas de desenvolvimento, incluindo modularização do código, uso de ambiente virtual e versionamento com Git.
+# 2. Configure o ambiente
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+pip install -r requirements.txt
 
-## Tecnologias Utilizadas
-- **Backend**: Python, Flask, face_recognition, SQLite
-- **Frontend**: HTML, CSS, JavaScript
-- **Outras Bibliotecas**: PIL (Pillow), PyJWT, python-decouple, Flask-WTF
+# 3. Configure o .env
+SECRET_KEY=sua_chave_secreta
+JWT_SECRET_KEY=outra_chave_super_secreta
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=senha_forte
 
-## Como Rodar o Projeto
-
-### Pré-requisitos
-- Python 3.8 ou superior instalado
-- Git instalado
-
-### Passos
-1. **Clone o repositório**:
-   ```bash
-   git clone https://github.com/seu_usuario/reconhecimento_facial_acesso.git
-   cd reconhecimento_facial_acesso
+# 4. Execute
+python app.py
